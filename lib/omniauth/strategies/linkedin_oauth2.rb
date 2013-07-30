@@ -5,6 +5,7 @@ module OmniAuth
     class LinkedInOAuth2 < OmniAuth::Strategies::OAuth2
       # Give your strategy a name.
       option :name, 'linkedin_oauth2'
+      option :authorize_options, [:scope, :state]
 
       # This is where you pass the options you would pass when
       # initializing your consumer from the OAuth gem.
@@ -15,6 +16,7 @@ module OmniAuth
       }
 
       option :scope, 'r_basicprofile r_emailaddress'
+      option :state, SecureRandom.base64.gsub(/[\/=+]/, '').slice(0..7).downcase
       option :fields, ['id', 'email-address', 'first-name', 'last-name', 'headline', 'location', 'industry', 'picture-url', 'public-profile-url']
 
       # These are called after authentication has succeeded. If
